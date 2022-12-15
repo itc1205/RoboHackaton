@@ -2,6 +2,8 @@ from PyQt5 import uic
 from PyQt5.QtWidgets import QDialog
 from mainWindowUi import Ui_Dialog
 
+from PyQt5 import QtCore
+
 from control import Servo
 
 class MainWindow(Ui_Dialog, QDialog):
@@ -10,7 +12,8 @@ class MainWindow(Ui_Dialog, QDialog):
         super().__init__()
         self.port = port
         self.setupUI()
-
+        for potr_i in portList:
+            self.PortCombobox.addItem("/dev/" + potr_i)
         self.servo_a = Servo("a", port)
         self.servo_b = Servo("b", port)
         self.servo_c = Servo("c", port)
@@ -59,7 +62,9 @@ class MainWindow(Ui_Dialog, QDialog):
         self.miauD.valueChanged.connect(lambda x: self.servoChange(3))
         self.miauE.valueChanged.connect(lambda x: self.servoChange(4))
         self.miauF.valueChanged.connect(lambda x: self.servoChange(5))
-
+        
+        self.OPENPORT.clicked.connect(self.openport)
+        self.CLOSEPORT.clicked.connect(self.closeport)
 
     def setupUI(self):
         super().setupUi(self)
@@ -76,4 +81,14 @@ class MainWindow(Ui_Dialog, QDialog):
         self.sliders[index].setValue(value_to_change)
         self.spinBoxes[index].setValue(value_to_change)
 
-    
+    def openport(self):
+        if not self.serial.isOpen():
+            self.serial.setPortName(self.PortCombobox.currentText())
+            self.serial.open(QtCore.QIODevice.ReadWrite)
+        else:
+            self.serial.close()
+            self.serial.setPortName(self.PortCombobox.currentText())
+            self.serial.open(QtCore.QIODevice.ReadWrite)
+
+    def closeport(self):
+        self.serial.close()

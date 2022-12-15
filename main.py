@@ -16,6 +16,7 @@ def main():
         portList.append(port.portName())
     print(portList)
     if not serial.isOpen():
+        serial.setPortName("/dev/" + portList[0])
         serial.open(QtCore.QIODevice.ReadWrite)
     app = QApplication(sys.argv)
     window = MainWindow(serial, portList)
