@@ -13,7 +13,7 @@ def main():
     portList = [port for port in ports]
     print(ports)
     app = QApplication(sys.argv)
-    window = MainWindow()
+    window = MainWindow(serial)
     window.show()
     sys.exit(app.exec_())
 
