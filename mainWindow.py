@@ -49,12 +49,12 @@ class MainWindow(Ui_Dialog, QDialog):
         ]
 
 
-        self.PortsliderA.valueChanged.connect(lambda x: self.servoChange(0), True)
-        self.PortsliderB.valueChanged.connect(lambda x: self.servoChange(1), True)
-        self.PortsliderC.valueChanged.connect(lambda x: self.servoChange(2), True)
-        self.PortsliderD.valueChanged.connect(lambda x: self.servoChange(3), True)
-        self.PortsliderE.valueChanged.connect(lambda x: self.servoChange(4), True)
-        self.PortsliderF.valueChanged.connect(lambda x: self.servoChange(5), True)
+        self.PortsliderA.valueChanged.connect(lambda x: self.servoChange(0, True))
+        self.PortsliderB.valueChanged.connect(lambda x: self.servoChange(1, True))
+        self.PortsliderC.valueChanged.connect(lambda x: self.servoChange(2, True))
+        self.PortsliderD.valueChanged.connect(lambda x: self.servoChange(3, True))
+        self.PortsliderE.valueChanged.connect(lambda x: self.servoChange(4, True))
+        self.PortsliderF.valueChanged.connect(lambda x: self.servoChange(5, True))
 
         self.miauA.valueChanged.connect(lambda x: self.servoChange(0))
         self.miauB.valueChanged.connect(lambda x: self.servoChange(1))
