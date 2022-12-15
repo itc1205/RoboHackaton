@@ -10,6 +10,6 @@ class Servo:
         command = ""
         command += str(val + 5)
         command += self.portchar
-        self.port.write(command)
+        self.port.write(command.encode())
     #Send it to the port
     
