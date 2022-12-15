@@ -66,6 +66,11 @@ class MainWindow(Ui_Dialog, QDialog):
         self.OPENPORT.clicked.connect(self.openport)
         self.CLOSEPORT.clicked.connect(self.closeport)
 
+        self.Portautomode.clicked.connect(lambda x: self.send("#auto"))
+        self.Portstopmode.clicked.connect(lambda x: self.send("#stop"))
+        self.Portprogrammingmode.clicked.connect(lambda x: self.send("#com"))
+
+
     def setupUI(self):
         super().setupUi(self)
 
@@ -90,5 +95,9 @@ class MainWindow(Ui_Dialog, QDialog):
             self.serial.setPortName(self.PortCombobox.currentText())
             self.serial.open(QtCore.QIODevice.ReadWrite)
 
+    def send(self, command: str):
+        
+        self.serial.write(command.encode())
+    
     def closeport(self):
         self.serial.close()
